@@ -1,0 +1,143 @@
+import { getSheet, getTable } from "../api/api.js";
+
+function getContactValue(contacts, names) {
+
+    for (const contact of contacts) {
+        for (const name of names) {
+            const directValue = String(contact[name] ?? "").trim();
+
+            if (directValue) return directValue;
+        }
+    }
+
+    const contact = contacts.find(item => {
+        const type = String(
+            item["نوع التواصل"] ??
+            item["وسيلة التواصل"] ??
+            item["النوع"] ??
+            ""
+        );
+
+        return names.some(name => type.includes(name));
+    });
+
+    if (!contact) return "";
+
+    return String(
+        contact["القيمة"] ??
+        contact["بيانات التواصل"] ??
+        contact["التفاصيل"] ??
+        ""
+    ).trim();
+
+}
+
+export async function Contact() {
+
+    const settings = await getSheet("07_التواصل");
+    const contacts = await getTable("07_التواصل");
+
+    if (!settings) return "";
+
+    const phone = getContactValue(contacts, ["الهاتف", "رقم الهاتف", "الجوال"]);
+    const whatsapp = getContactValue(contacts, ["واتساب", "رقم الواتساب"]);
+    const email = getContactValue(contacts, ["البريد الإلكتروني", "البريد"]);
+    const whatsappNumber = whatsapp.replace(/[^\d]/g, "");
+    const phoneLink = phone.replace(/\s+/g, "");
+
+    const contactCards = [
+        {
+            type: "phone",
+            label: "الهاتف",
+            value: phone,
+            href: `tel:${phoneLink}`,
+            icon: `
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92z"/>
+                </svg>
+            `
+        },
+        {
+            type: "whatsapp",
+            label: "واتساب",
+            value: whatsapp,
+            href: `https://wa.me/${whatsappNumber}`,
+            icon: `
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 9.5 9.5 0 0 1-4.2-1L3 21l1.5-4.5A8.5 8.5 0 1 1 21 11.5z"/>
+                    <path d="M8.5 8.5c.5 3 2 4.5 5 5"/>
+                </svg>
+            `
+        },
+        {
+            type: "email",
+            label: "البريد الإلكتروني",
+            value: email,
+            href: `mailto:${email}`,
+            icon: `
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="m3 7 9 6 9-6"/>
+                </svg>
+            `
+        }
+    ];
+
+    return `
+<section
+    class="contact-section"
+    id="contact"
+    ${settings["لون الخلفية"] ? `style="background:${settings["لون الخلفية"]}"` : ""}
+>
+
+    <div class="container">
+
+        <div class="contact-heading">
+
+            <span class="section-tag">
+                ${settings["عنوان القسم"] ?? ""}
+            </span>
+
+            <h2>شكراً لزيارتك</h2>
+
+            <p>
+                ${settings["نص الشكر"] ?? ""}
+            </p>
+
+        </div>
+
+        <div class="contact-grid">
+
+            ${contactCards.map(card => `
+                <a
+                    class="contact-card contact-card-${card.type}"
+                    href="${card.href}"
+                    ${card.type === "whatsapp" ? `target="_blank" rel="noopener"` : ""}
+                >
+
+                    <span class="contact-icon">
+                        ${card.icon}
+                    </span>
+
+                    <span class="contact-card-content">
+                        <strong>${card.label}</strong>
+                        <span dir="ltr">${card.value}</span>
+                    </span>
+
+                    <span class="contact-arrow" aria-hidden="true">←</span>
+
+                </a>
+            `).join("")}
+
+        </div>
+
+        <a class="btn btn-outline contact-previous" href="#certificates">
+            السابق
+        </a>
+
+    </div>
+
+</section>
+`;
+
+}

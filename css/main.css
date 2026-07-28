@@ -1,0 +1,18 @@
+@import "base/variables.css";
+@import "base/reset.css";
+@import "base/global.css";
+
+@import "layout/layout.css";
+
+@import "components/button.css";
+@import "components/card.css";
+
+@import "sections/hero.css";
+@import "layout/header.css";
+@import "sections/about.css";
+@import "sections/education.css";
+@import "sections/experience.css";
+@import "sections/training.css";
+@import "sections/gallery.css";
+@import "sections/volunteering.css";
+@import "sections/contact.css";
