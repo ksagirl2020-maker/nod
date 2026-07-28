@@ -1,14 +1,14 @@
-import { getSheet, getTable, getImage } from "../api/api.js";
+import { getSectionData, getImage } from "../api/api.js";
 
 let certificatesData = [];
 
 export async function Certificates() {
 
-    const settings = await getSheet("06_شهادات الشكر");
-    const certificates = await getTable("06_شهادات الشكر");
+    const data = await getSectionData("06_شهادات الشكر");
 
-    if (!settings) return "";
+    if (!data) return "";
 
+    const { section, items: certificates } = data;
     certificatesData = certificates;
 
     const managerCertificates = certificates.filter(certificate =>
@@ -41,26 +41,22 @@ export async function Certificates() {
     ];
 
     return `
-<section
-    class="certificates-section"
-    id="certificates"
-    ${settings["لون الخلفية"] ? `style="background:${settings["لون الخلفية"]}"` : ""}
->
+<section class="certificates-section" id="certificates">
 
     <div class="container">
 
         <div class="section-header">
 
             <span class="section-tag">
-                ${settings["عنوان القسم"] ?? ""}
+                ${section.title}
             </span>
 
             <h2>
-                ${settings["العنوان الرئيسي"] ?? ""}
+                ${section.subtitle}
             </h2>
 
             <p class="section-subtitle">
-                ${settings["العنوان الفرعي"] ?? ""}
+                ${section.description}
             </p>
 
         </div>
@@ -79,7 +75,7 @@ export async function Certificates() {
         <div class="certificates-grid">
 
             ${certificates.map((certificate, index) => {
-                const image = getImage(certificate["صورة الشهادة"] ?? "");
+                const image = getImage(certificate["معرف الصورة"] ?? "");
 
                 return `
                     <button
@@ -193,7 +189,7 @@ export function initCertificates() {
 
         const certificate = certificates[activeIndex];
 
-        image.src = getImage(certificate["صورة الشهادة"] ?? "");
+        image.src = getImage(certificate["معرف الصورة"] ?? "");
         image.alt = certificate["اسم الشهادة"] ?? "";
         title.textContent = certificate["اسم الشهادة"] ?? "";
         issuer.textContent = certificate["الجهة المانحة"] ?? "";

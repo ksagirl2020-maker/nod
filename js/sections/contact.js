@@ -34,8 +34,10 @@ function getContactValue(contacts, names) {
 
 export async function Contact() {
 
-    const settings = await getSheet("07_التواصل");
-    const contacts = await getTable("07_التواصل");
+    const [settings, contacts] = await Promise.all([
+        getSheet("07_التواصل"),
+        getTable("07_التواصل")
+    ]);
 
     if (!settings) return "";
 

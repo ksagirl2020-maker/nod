@@ -2,8 +2,10 @@ import { getSheet, getTable } from "../api/api.js";
 import { getIcon } from "../utils/icons.js";
 export async function About() {
 
-    const settings = await getSheet("02_نبذة_تعريفية");
-    const items = await getTable("02_نبذة_تعريفية");
+    const [settings, items] = await Promise.all([
+        getSheet("02_نبذة_تعريفية"),
+        getTable("02_نبذة_تعريفية")
+    ]);
 
     if (!settings) return "";
 

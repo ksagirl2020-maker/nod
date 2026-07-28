@@ -1,12 +1,12 @@
-import { getSheet, getTable } from "../api/api.js";
+import { getSectionData } from "../api/api.js";
 
 export async function Volunteering() {
 
-    const settings = await getSheet("08_التطوع");
-    const volunteering = await getTable("08_التطوع");
+    const data = await getSectionData("08_التطوع");
 
-    if (!settings) return "";
+    if (!data) return "";
 
+    const { section, items: volunteering } = data;
     const orderedVolunteering = [...volunteering].sort((a, b) =>
         String(a["الترتيب"] ?? "").localeCompare(
             String(b["الترتيب"] ?? ""),
@@ -21,26 +21,22 @@ export async function Volunteering() {
     );
 
     return `
-<section
-    class="volunteering-section"
-    id="volunteering"
-    ${settings["لون الخلفية"] ? `style="background:${settings["لون الخلفية"]}"` : ""}
->
+<section class="volunteering-section" id="volunteering">
 
     <div class="container">
 
         <div class="section-header">
 
             <span class="section-tag">
-                ${settings["عنوان القسم"] ?? ""}
+                ${section.title}
             </span>
 
             <h2>
-                ${settings["العنوان الرئيسي"] ?? ""}
+                ${section.subtitle}
             </h2>
 
             <p class="section-subtitle">
-                ${settings["العنوان الفرعي"] ?? ""}
+                ${section.description}
             </p>
 
         </div>

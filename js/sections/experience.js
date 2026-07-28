@@ -2,8 +2,10 @@ import { getSheet, getTable } from "../api/api.js";
 
 export async function Experience() {
 
-    const settings = await getSheet("04_الخبرات المهنية");
-    const experiences = await getTable("04_الخبرات المهنية");
+    const [settings, experiences] = await Promise.all([
+        getSheet("04_الخبرات المهنية"),
+        getTable("04_الخبرات المهنية")
+    ]);
 
     if (!settings) return "";
 

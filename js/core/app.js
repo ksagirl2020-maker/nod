@@ -20,16 +20,19 @@ async function init() {
     const header = document.querySelector("#header");
 
     header.innerHTML = Navbar();
-    app.innerHTML = `
-        ${await Hero()}
-        ${await About()}
-        ${await Education()}
-        ${await Experience()}
-        ${await Training()}
-        ${await Certificates()}
-        ${await Volunteering()}
-        ${await Contact()}
-    `;
+
+    const sections = await Promise.all([
+        Hero(),
+        About(),
+        Education(),
+        Experience(),
+        Training(),
+        Certificates(),
+        Volunteering(),
+        Contact()
+    ]);
+
+    app.innerHTML = sections.join("");
 
     initNavbar();
     initCertificates();

@@ -2,8 +2,10 @@ import { getSheet, getTable } from "../api/api.js";
 
 export async function Training() {
 
-    const settings = await getSheet("05_التدريب");
-    const programs = await getTable("05_التدريب");
+    const [settings, programs] = await Promise.all([
+        getSheet("05_التدريب"),
+        getTable("05_التدريب")
+    ]);
 
     if (!settings) return "";
 
