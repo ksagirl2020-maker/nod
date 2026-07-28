@@ -153,14 +153,6 @@
     line-height:1.9;
 }
 
-.experience-navigation{
-    display:flex;
-    justify-content:space-between;
-    gap:18px;
-    max-width:1050px;
-    margin:30px auto 0;
-}
-
 @media (max-width:768px){
     .experience-section{
         padding:90px 0;
@@ -211,8 +203,4 @@
         flex-direction:column;
     }
 
-    .experience-navigation{
-        flex-direction:column;
-        margin-top:22px;
-    }
 }

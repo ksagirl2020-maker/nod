@@ -227,6 +227,94 @@
 }
 
 /* ==========================================================
+   Profile Info
+========================================================== */
+
+.hero-info{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    max-width:640px;
+    margin-bottom:34px;
+}
+
+.hero-info-item{
+    display:flex;
+    min-width:0;
+    min-height:82px;
+    padding:16px 18px;
+    align-items:center;
+    gap:14px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:rgba(255,255,255,.72);
+    box-shadow:var(--shadow-sm);
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+a.hero-info-item:hover{
+    transform:translateY(-3px);
+    border-color:var(--primary-light);
+    background:var(--surface);
+    box-shadow:var(--shadow-md);
+}
+
+a.hero-info-item:focus-visible{
+    outline:3px solid rgba(109,40,217,.25);
+    outline-offset:3px;
+}
+
+.hero-icon{
+    display:flex;
+    width:44px;
+    height:44px;
+    flex:0 0 44px;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:var(--primary-soft);
+    color:var(--primary);
+}
+
+.hero-icon svg{
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.hero-info-content{
+    display:flex;
+    min-width:0;
+    flex-direction:column;
+    gap:4px;
+}
+
+.hero-info-content small{
+    color:var(--text-light);
+    font-size:.76rem;
+    font-weight:600;
+}
+
+.hero-info-content strong{
+    max-width:100%;
+    overflow:hidden;
+    color:var(--text);
+    font-size:.94rem;
+    font-weight:700;
+    text-align:right;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/* ==========================================================
    Buttons
 ========================================================== */
 
@@ -370,6 +458,12 @@
 
     }
 
+    .hero-info{
+        width:min(640px,100%);
+        margin-inline:auto;
+        text-align:right;
+    }
+
     .hero-buttons{
 
         justify-content:center;
@@ -499,6 +593,32 @@
 
         transform:translateX(170%);
 
+    }
+
+}
+
+@media (max-width:600px){
+
+    .hero-info{
+        grid-template-columns:1fr;
+        width:100%;
+        gap:11px;
+    }
+
+    .hero-info-item{
+        min-height:72px;
+        padding:13px 15px;
+    }
+
+    .hero-icon{
+        width:40px;
+        height:40px;
+        flex-basis:40px;
+    }
+
+    .hero-info-content strong{
+        white-space:normal;
+        overflow-wrap:anywhere;
     }
 
 }

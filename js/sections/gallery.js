@@ -117,11 +117,6 @@ export async function Certificates() {
 
         </div>
 
-        <nav class="certificates-navigation" aria-label="التنقل بين الأقسام">
-            <a class="btn btn-outline" href="#training">السابق</a>
-            <a class="btn btn-primary" href="#volunteering">التالي</a>
-        </nav>
-
     </div>
 
 </section>

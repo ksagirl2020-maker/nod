@@ -1,35 +1,29 @@
-import { getSheet, getTable } from "../api/api.js";
+import { getSectionData } from "../api/api.js";
 
 export async function Experience() {
 
-    const [settings, experiences] = await Promise.all([
-        getSheet("04_الخبرات المهنية"),
-        getTable("04_الخبرات المهنية")
-    ]);
+    const data = await getSectionData("04_الخبرات المهنية");
 
-    if (!settings) return "";
+    if (!data) return "";
 
+    const { section, items: experiences } = data;
     return `
-<section
-    class="experience-section"
-    id="experience"
-    ${settings["لون الخلفية"] ? `style="background:${settings["لون الخلفية"]}"` : ""}
->
+<section class="experience-section" id="experience">
 
     <div class="container">
 
         <div class="section-header">
 
             <span class="section-tag">
-                ${settings["عنوان القسم"] ?? ""}
+                ${section.title}
             </span>
 
             <h2>
-                ${settings["العنوان الرئيسي"] ?? ""}
+                ${section.subtitle}
             </h2>
 
             <p class="section-subtitle">
-                ${settings["العنوان الفرعي"] ?? ""}
+                ${section.description}
             </p>
 
         </div>
@@ -69,11 +63,6 @@ export async function Experience() {
             `).join("")}
 
         </div>
-
-        <nav class="experience-navigation" aria-label="التنقل بين الأقسام">
-            <a class="btn btn-outline" href="#qualifications">السابق</a>
-            <a class="btn btn-primary" href="#training">التالي</a>
-        </nav>
 
     </div>
 

@@ -42,9 +42,17 @@ function writeCache(key, data) {
   }
 }
 
-async function requestData(sheetName, type) {
+function removeCache(key) {
+  try {
+    localStorage.removeItem(`${CACHE_PREFIX}${key}`);
+  } catch {
+    // لا يحتاج غياب التخزين المحلي إلى معالجة إضافية.
+  }
+}
+
+async function requestData(sheetName, type, forceRefresh = false) {
   const key = `${sheetName}:${type}`;
-  const cached = readCache(key);
+  const cached = forceRefresh ? undefined : readCache(key);
 
   if (cached !== undefined) return cached;
   if (pendingRequests.has(key)) return pendingRequests.get(key);
@@ -85,9 +93,9 @@ async function requestData(sheetName, type) {
    قراءة إعدادات الصفحة (Key / Value)
 ========================================================== */
 
-export async function getSheet(sheetName) {
+export async function getSheet(sheetName, forceRefresh = false) {
   try {
-    return await requestData(sheetName, "sheet");
+    return await requestData(sheetName, "sheet", forceRefresh);
   } catch (error) {
     console.error("getSheet()", error);
     return null;
@@ -112,22 +120,35 @@ export async function getTable(sheetName) {
 ========================================================== */
 
 export async function getSectionData(sheetName) {
-  const [header, table] = await Promise.all([
+  let [header, table] = await Promise.all([
     getSheet(sheetName),
     getTable(sheetName)
   ]);
 
   if (!header) return null;
 
-  const headerKeys = new Set([
+  const headerKeys = [
     "SectionTitle",
     "SectionSubtitle",
     "SectionDescription"
-  ]);
+  ];
+
+  const hasSectionHeader = headerKeys.every(key =>
+    Object.prototype.hasOwnProperty.call(header, key)
+  );
+
+  if (!hasSectionHeader) {
+    removeCache(`${sheetName}:sheet`);
+    header = await getSheet(sheetName, true);
+  }
+
+  if (!header) return null;
+
+  const headerKeySet = new Set(headerKeys);
 
   const items = table.filter(row => {
     const values = Object.values(row).map(value => String(value).trim());
-    const isHeaderRow = values.some(value => headerKeys.has(value));
+    const isHeaderRow = values.some(value => headerKeySet.has(value));
     const isEmptyRow = values.every(value => value === "");
 
     return !isHeaderRow && !isEmptyRow;
@@ -135,9 +156,9 @@ export async function getSectionData(sheetName) {
 
   return {
     section: {
-      title: header.SectionTitle,
-      subtitle: header.SectionSubtitle,
-      description: header.SectionDescription
+      title: header.SectionTitle ?? "",
+      subtitle: header.SectionSubtitle ?? "",
+      description: header.SectionDescription ?? ""
     },
     items
   };

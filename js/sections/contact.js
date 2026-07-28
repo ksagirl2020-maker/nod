@@ -133,10 +133,6 @@ export async function Contact() {
 
         </div>
 
-        <a class="btn btn-outline contact-previous" href="#certificates">
-            السابق
-        </a>
-
     </div>
 
 </section>

@@ -7,7 +7,7 @@ export function Navbar() {
 <div class="container nav-container">
 
 <a class="logo" href="#home">
-HM
+NOD
 </a>
 
 <ul class="nav-links">

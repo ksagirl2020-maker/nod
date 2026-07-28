@@ -153,12 +153,6 @@
     transform:translateX(-5px);
 }
 
-.contact-previous{
-    display:flex;
-    width:max-content;
-    margin:48px auto 0;
-}
-
 @media (max-width:992px){
     .contact-grid{
         grid-template-columns:1fr;
@@ -187,9 +181,6 @@
         padding:21px 18px;
     }
 
-    .contact-previous{
-        width:100%;
-    }
 }
 
 @media (prefers-reduced-motion:reduce){

@@ -76,11 +76,6 @@ export async function Volunteering() {
 
         </div>
 
-        <nav class="volunteering-navigation" aria-label="التنقل بين الأقسام">
-            <a class="btn btn-outline" href="#certificates">السابق</a>
-            <a class="btn btn-primary" href="#contact">التالي</a>
-        </nav>
-
     </div>
 
 </section>

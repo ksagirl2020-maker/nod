@@ -21,6 +21,14 @@ export async function Training() {
         return groups;
     }, new Map());
 
+    const totalHours = programs.reduce((total, program) => {
+        const normalizedHours = String(program["عدد الساعات"] ?? "")
+            .replace(/[٠-٩]/g, digit => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
+            .replace(/[^\d.-]/g, "");
+
+        return total + (Number(normalizedHours) || 0);
+    }, 0);
+
     return `
 <section
     class="training-section"
@@ -43,6 +51,20 @@ export async function Training() {
             <p class="section-subtitle">
                 ${settings["العنوان الفرعي"] ?? ""}
             </p>
+
+        </div>
+
+        <div class="training-statistics">
+
+            <article class="training-stat">
+                <strong>${programs.length.toLocaleString("ar-SA")}</strong>
+                <span>عدد الدورات</span>
+            </article>
+
+            <article class="training-stat">
+                <strong>${totalHours.toLocaleString("ar-SA")}</strong>
+                <span>إجمالي الساعات التدريبية</span>
+            </article>
 
         </div>
 
@@ -90,11 +112,6 @@ export async function Training() {
             `).join("")}
 
         </div>
-
-        <nav class="training-navigation" aria-label="التنقل بين الأقسام">
-            <a class="btn btn-outline" href="#experience">السابق</a>
-            <a class="btn btn-primary" href="#certificates">التالي</a>
-        </nav>
 
     </div>
 

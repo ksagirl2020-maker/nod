@@ -80,11 +80,6 @@ export async function Education() {
 
         </div>
 
-        <nav class="education-navigation" aria-label="التنقل بين الأقسام">
-            <a class="btn btn-outline" href="#about">السابق</a>
-            <a class="btn btn-primary" href="#experience">التالي</a>
-        </nav>
-
     </div>
 
 </section>
