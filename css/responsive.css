@@ -1,0 +1,278 @@
+/* ==========================================================
+   Responsive Enhancements
+========================================================== */
+
+@media (max-width:768px){
+    html{
+        scroll-padding-top:72px;
+    }
+
+    body{
+        min-width:0;
+    }
+
+    .container{
+        width:calc(100% - 32px);
+    }
+
+    section{
+        scroll-margin-top:72px;
+    }
+
+    .navbar{
+        height:72px;
+    }
+
+    .nav-container{
+        width:100%;
+        padding-inline:16px;
+        gap:18px;
+    }
+
+    .logo{
+        flex:0 0 auto;
+        font-size:22px;
+    }
+
+    .nav-links{
+        min-width:0;
+        flex:1;
+        gap:8px;
+        overflow-x:auto;
+        overscroll-behavior-inline:contain;
+        scrollbar-width:none;
+        scroll-snap-type:x proximity;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .nav-links::-webkit-scrollbar{
+        display:none;
+    }
+
+    .nav-links li{
+        flex:0 0 auto;
+        scroll-snap-align:center;
+    }
+
+    .nav-links a{
+        display:flex;
+        min-height:44px;
+        padding:0 12px;
+        align-items:center;
+        border-radius:12px;
+        font-size:13px;
+        white-space:nowrap;
+    }
+
+    .nav-links a.active{
+        background:var(--primary-soft);
+        color:var(--primary);
+    }
+
+    .section-header{
+        width:100%;
+        padding-inline:0;
+    }
+
+    .section-header h2,
+    .contact-heading h2{
+        font-size:clamp(1.75rem,8vw,2.35rem);
+        overflow-wrap:anywhere;
+    }
+
+    .section-subtitle,
+    .contact-heading p{
+        font-size:1rem;
+        line-height:1.9;
+        overflow-wrap:anywhere;
+    }
+
+    .section-tag{
+        max-width:100%;
+        text-align:center;
+        white-space:normal;
+    }
+
+    .hero-content{
+        width:100%;
+        gap:36px;
+    }
+
+    .hero h1{
+        max-width:100%;
+        overflow-wrap:anywhere;
+    }
+
+    .hero-avatar{
+        width:min(280px,78vw);
+        height:auto;
+        aspect-ratio:1;
+    }
+
+    .education-card h3,
+    .career-card h3,
+    .training-card h4,
+    .volunteering-card h3,
+    .certificate-content strong{
+        overflow-wrap:anywhere;
+    }
+
+    .education-year,
+    .career-period,
+    .training-year,
+    .training-hours{
+        white-space:normal;
+    }
+
+    .certificate-card,
+    .contact-card{
+        width:100%;
+    }
+
+    .lightbox-caption{
+        max-width:100%;
+        font-size:.9rem;
+    }
+}
+
+@media (max-width:480px){
+    html{
+        scroll-padding-top:64px;
+    }
+
+    .container{
+        width:calc(100% - 24px);
+    }
+
+    section{
+        scroll-margin-top:64px;
+    }
+
+    .navbar{
+        height:64px;
+    }
+
+    .nav-container{
+        padding-inline:12px;
+        gap:10px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .nav-links a{
+        min-height:40px;
+        padding:0 10px;
+        font-size:12px;
+    }
+
+    .hero{
+        padding-top:82px;
+    }
+
+    .hero h1{
+        font-size:clamp(1.8rem,10vw,2.15rem);
+    }
+
+    .hero h2{
+        font-size:1.15rem;
+    }
+
+    .hero-avatar{
+        width:min(235px,72vw);
+    }
+
+    .about-section .container{
+        padding-inline:0;
+    }
+
+    .about-card,
+    .education-card,
+    .career-card,
+    .training-card,
+    .volunteering-card,
+    .contact-card{
+        border-radius:16px;
+    }
+
+    .education-item{
+        grid-template-columns:34px minmax(0,1fr);
+        gap:12px;
+    }
+
+    .education-timeline::before{
+        right:16px;
+    }
+
+    .education-order{
+        width:34px;
+        height:34px;
+        font-size:.72rem;
+    }
+
+    .education-card{
+        padding:19px 16px;
+    }
+
+    .career-timeline{
+        padding-right:16px;
+    }
+
+    .career-item,
+    .career-item:nth-child(even){
+        padding-right:20px;
+    }
+
+    .training-group{
+        padding:16px;
+    }
+
+    .certificates-statistics{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .certificate-stat{
+        padding:18px 10px;
+    }
+
+    .certificate-stat span{
+        font-size:.8rem;
+        line-height:1.6;
+    }
+
+    .contact-icon{
+        width:46px;
+        height:46px;
+        flex-basis:46px;
+    }
+}
+
+@media (max-width:360px){
+    .logo{
+        display:none;
+    }
+
+    .nav-links{
+        width:100%;
+    }
+
+    .certificates-statistics{
+        grid-template-columns:1fr;
+    }
+
+    .contact-card{
+        gap:12px;
+    }
+
+    .contact-arrow{
+        display:none;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    html{
+        scroll-behavior:auto;
+    }
+}
