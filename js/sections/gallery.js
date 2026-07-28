@@ -83,6 +83,7 @@ export async function Certificates() {
                         type="button"
                         data-certificate-index="${index}"
                         aria-label="${certificate["اسم الشهادة"] ?? ""}"
+                        ${index >= 4 ? "hidden" : ""}
                     >
 
                         <span class="certificate-thumbnail">
@@ -116,6 +117,15 @@ export async function Certificates() {
             }).join("")}
 
         </div>
+
+        ${certificates.length > 4 ? `
+            <button
+                class="btn btn-outline certificates-more"
+                type="button"
+            >
+                عرض المزيد
+            </button>
+        ` : ""}
 
     </div>
 
@@ -176,6 +186,7 @@ export function initCertificates() {
     const closeButton = lightbox.querySelector(".lightbox-close");
     const previousButton = lightbox.querySelector(".lightbox-previous");
     const nextButton = lightbox.querySelector(".lightbox-next");
+    const moreButton = document.querySelector(".certificates-more");
     let activeIndex = 0;
     let touchStartX = 0;
 
@@ -216,6 +227,14 @@ export function initCertificates() {
         card.addEventListener("click", () => {
             openLightbox(Number(card.dataset.certificateIndex));
         });
+    });
+
+    moreButton?.addEventListener("click", () => {
+        cards.forEach(card => {
+            card.hidden = false;
+        });
+
+        moreButton.hidden = true;
     });
 
     closeButton.addEventListener("click", closeLightbox);

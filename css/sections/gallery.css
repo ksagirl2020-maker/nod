@@ -51,7 +51,7 @@
 
 .certificates-grid{
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-columns:repeat(4,minmax(0,1fr));
     gap:24px;
 }
 
@@ -120,6 +120,16 @@
     color:var(--primary);
     font-size:.88rem;
     font-weight:700;
+}
+
+.certificates-more{
+    display:flex;
+    width:max-content;
+    margin:38px auto 0;
+}
+
+.certificates-more[hidden]{
+    display:none;
 }
 
 body.lightbox-open{
@@ -257,6 +267,10 @@ body.lightbox-open{
 
     .certificates-grid{
         grid-template-columns:1fr;
+    }
+
+    .certificates-more{
+        width:100%;
     }
 
     .certificate-lightbox{
