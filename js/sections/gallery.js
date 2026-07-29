@@ -4,22 +4,22 @@ let certificatesData = [];
 
 export async function Certificates() {
 
-    const data = await getSectionData("06_شهادات الشكر");
+    const data = await getSectionData(
+        "06_شهادات الشكر",
+        { refreshTable:true }
+    );
 
     if (!data) return "";
 
     const { section, items: certificates } = data;
     certificatesData = certificates;
 
-    const managerCertificates = certificates.filter(certificate =>
-        String(certificate["الجهة المانحة"] ?? "").includes("المدير العام")
-    ).length;
+    const managerCertificates = certificates.filter(certificate => {
+        const issuer = String(certificate["الجهة المانحة"] ?? "").trim();
 
-    const uniqueIssuers = new Set(
-        certificates
-            .map(certificate => String(certificate["الجهة المانحة"] ?? "").trim())
-            .filter(Boolean)
-    ).size;
+        return issuer.includes("المدير العام") ||
+            issuer.includes("الإدارة العامة للتعليم بعسير");
+    }).length;
 
     const statistics = [
         {
@@ -33,10 +33,6 @@ export async function Certificates() {
         {
             label: "الشهادات من الجهات المختلفة",
             value: certificates.length - managerCertificates
-        },
-        {
-            label: "الجهات المانحة الفريدة",
-            value: uniqueIssuers
         }
     ];
 

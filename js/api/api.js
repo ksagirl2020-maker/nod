@@ -106,9 +106,9 @@ export async function getSheet(sheetName, forceRefresh = false) {
    قراءة جدول داخل الشيت
 ========================================================== */
 
-export async function getTable(sheetName) {
+export async function getTable(sheetName, forceRefresh = false) {
   try {
-    return await requestData(sheetName, "table") || [];
+    return await requestData(sheetName, "table", forceRefresh) || [];
   } catch (error) {
     console.error("getTable()", error);
     return [];
@@ -119,10 +119,13 @@ export async function getTable(sheetName) {
    قراءة رأس القسم وجدوله من نفس الشيت
 ========================================================== */
 
-export async function getSectionData(sheetName) {
+export async function getSectionData(
+  sheetName,
+  { refreshTable = false } = {}
+) {
   let [header, table] = await Promise.all([
     getSheet(sheetName),
-    getTable(sheetName)
+    getTable(sheetName, refreshTable)
   ]);
 
   if (!header) return null;

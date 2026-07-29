@@ -10,7 +10,7 @@
 
 .certificates-statistics{
     display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(3,minmax(0,1fr));
     gap:20px;
     margin:65px 0 48px;
 }
@@ -64,6 +64,10 @@
     text-align:right;
     box-shadow:var(--shadow-sm);
     transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.certificate-card[hidden]{
+    display:none;
 }
 
 .certificate-card:hover{
