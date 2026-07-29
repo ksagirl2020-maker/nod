@@ -127,12 +127,17 @@
 }
 
 .career-period{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
     padding:7px 14px;
     border-radius:10px;
     background:var(--primary-soft);
     color:var(--primary);
     font-size:.85rem;
     font-weight:700;
+    direction:ltr;
+    white-space:nowrap;
 }
 
 .career-company{

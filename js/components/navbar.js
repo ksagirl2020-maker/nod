@@ -20,6 +20,8 @@ NOD
 
 <li><a href="#experience">الخبرات</a></li>
 
+<li><a href="#other-experience">الخبرات القيادية والتكليفات</a></li>
+
 <li><a href="#training">التدريب</a></li>
 
 <li><a href="#certificates">شهادات الشكر</a></li>

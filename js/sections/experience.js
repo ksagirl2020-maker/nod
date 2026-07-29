@@ -40,7 +40,9 @@ export async function Experience() {
                         <div class="career-card-top">
 
                             <span class="career-period">
-                                ${experience["الفترة الزمنية"] ?? ""}
+                                <bdi>${experience["تاريخ البداية"] ?? ""}</bdi>
+                                <span aria-hidden="true">—</span>
+                                <bdi>${experience["تاريخ النهاية"] ?? ""}</bdi>
                             </span>
 
                             <span class="career-company">

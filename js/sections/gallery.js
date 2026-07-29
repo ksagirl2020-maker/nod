@@ -4,10 +4,7 @@ let certificatesData = [];
 
 export async function Certificates() {
 
-    const data = await getSectionData(
-        "06_شهادات الشكر",
-        { refreshTable:true }
-    );
+    const data = await getSectionData("06_شهادات الشكر");
 
     if (!data) return "";
 

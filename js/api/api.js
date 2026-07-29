@@ -5,8 +5,8 @@
 const API_URL =
   "https://script.google.com/macros/s/AKfycbwKMQj5pGFMiTBrf4B6XIcu990z52oew8QfRRcvKnWGkINhlbBheK5CUz2g_qBcPzb74w/exec";
 
-const CACHE_PREFIX = "portfolio-api:v1:";
-const CACHE_DURATION = 30 * 60 * 1000;
+const CACHE_PREFIX = "portfolio-api:v2:";
+const CACHE_DURATION = 5 * 60 * 1000;
 const pendingRequests = new Map();
 
 function readCache(key) {

@@ -148,7 +148,7 @@ export async function Hero() {
 
                         ${
                             finalImage
-                                ? `<img src="${finalImage}" alt="${profile["الاسم الكامل"]}" loading="lazy">`
+                                ? `<img src="${finalImage}" alt="${profile["الاسم الكامل"]}" loading="eager" fetchpriority="high">`
                                 : ""
                         }
 

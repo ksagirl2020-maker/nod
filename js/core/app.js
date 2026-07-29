@@ -2,6 +2,7 @@ import { Hero } from "../sections/hero.js";
 import { About } from "../sections/about.js";
 import { Education } from "../sections/education.js";
 import { Experience } from "../sections/experience.js";
+import { OtherExperience } from "../sections/otherExperience.js";
 import { Training } from "../sections/training.js";
 import {
     Certificates,
@@ -26,6 +27,7 @@ async function init() {
         About(),
         Education(),
         Experience(),
+        OtherExperience(),
         Training(),
         Certificates(),
         Volunteering(),
