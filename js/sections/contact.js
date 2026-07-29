@@ -2,6 +2,8 @@ import { getSheet, getTable } from "../api/api.js";
 
 function getContactValue(contacts, names) {
 
+    const normalizedNames = names.map(name => name.toLowerCase());
+
     for (const contact of contacts) {
         for (const name of names) {
             const directValue = String(contact[name] ?? "").trim();
@@ -15,10 +17,11 @@ function getContactValue(contacts, names) {
             item["نوع التواصل"] ??
             item["وسيلة التواصل"] ??
             item["النوع"] ??
+            item["العنوان"] ??
             ""
-        );
+        ).trim().toLowerCase();
 
-        return names.some(name => type.includes(name));
+        return normalizedNames.some(name => type.includes(name));
     });
 
     if (!contact) return "";
@@ -32,6 +35,36 @@ function getContactValue(contacts, names) {
 
 }
 
+function normalizeDigits(value) {
+    return String(value ?? "")
+        .replace(/[٠-٩]/g, digit => "٠١٢٣٤٥٦٧٨٩".indexOf(digit))
+        .replace(/\D/g, "");
+}
+
+function getSaudiNumber(value) {
+    let number = normalizeDigits(value);
+
+    if (number.startsWith("00")) {
+        number = number.slice(2);
+    }
+
+    if (number.startsWith("966")) return number;
+    if (number.startsWith("0")) return `966${number.slice(1)}`;
+    if (number.length === 9 && number.startsWith("5")) return `966${number}`;
+
+    return number;
+}
+
+function getPhoneDisplay(value) {
+    const number = normalizeDigits(value);
+
+    if (number.length === 9 && number.startsWith("5")) {
+        return `0${number}`;
+    }
+
+    return String(value ?? "").trim();
+}
+
 export async function Contact() {
 
     const [settings, contacts] = await Promise.all([
@@ -41,18 +74,29 @@ export async function Contact() {
 
     if (!settings) return "";
 
-    const phone = getContactValue(contacts, ["الهاتف", "رقم الهاتف", "الجوال"]);
-    const whatsapp = getContactValue(contacts, ["واتساب", "رقم الواتساب"]);
-    const email = getContactValue(contacts, ["البريد الإلكتروني", "البريد"]);
-    const whatsappNumber = whatsapp.replace(/[^\d]/g, "");
-    const phoneLink = phone.replace(/\s+/g, "");
+    const phone = getContactValue(
+        contacts,
+        ["phone", "الهاتف", "رقم الهاتف", "الجوال"]
+    );
+    const whatsapp = getContactValue(
+        contacts,
+        ["whatsapp", "واتساب", "رقم الواتساب"]
+    );
+    const email = getContactValue(
+        contacts,
+        ["email", "البريد الإلكتروني", "البريد"]
+    );
+    const phoneDisplay = getPhoneDisplay(phone);
+    const whatsappDisplay = getPhoneDisplay(whatsapp);
+    const phoneLink = getSaudiNumber(phone);
+    const whatsappNumber = getSaudiNumber(whatsapp);
 
     const contactCards = [
         {
             type: "phone",
             label: "الهاتف",
-            value: phone,
-            href: `tel:${phoneLink}`,
+            value: phoneDisplay,
+            href: `tel:+${phoneLink}`,
             icon: `
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92z"/>
@@ -62,7 +106,7 @@ export async function Contact() {
         {
             type: "whatsapp",
             label: "واتساب",
-            value: whatsapp,
+            value: whatsappDisplay,
             href: `https://wa.me/${whatsappNumber}`,
             icon: `
                 <svg viewBox="0 0 24 24" aria-hidden="true">
