@@ -1,4 +1,4 @@
-import { Hero } from "../sections/hero.js";
+import { Hero, initHeroDate } from "../sections/hero.js";
 import { About } from "../sections/about.js";
 import { Education } from "../sections/education.js";
 import { Experience } from "../sections/experience.js";
@@ -40,6 +40,7 @@ async function init() {
     footer.innerHTML = Footer();
 
     initNavbar();
+    initHeroDate();
     initCertificates();
     initVolunteering();
 

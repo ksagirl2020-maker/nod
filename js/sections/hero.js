@@ -35,6 +35,8 @@ export async function Hero() {
     return `
         <section class="hero" id="home">
 
+            <time class="hero-current-date"></time>
+
             <div class="container hero-content">
 
                 <div class="hero-text">
@@ -160,4 +162,30 @@ export async function Hero() {
 
         </section>
     `;
+}
+
+export function initHeroDate() {
+
+    const dateElement = document.querySelector(".hero-current-date");
+
+    if (!dateElement) return;
+
+    const formatter = new Intl.DateTimeFormat("ar-SA", {
+        calendar:"gregory",
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+    });
+
+    const updateDate = () => {
+        const now = new Date();
+
+        dateElement.textContent = formatter.format(now);
+        dateElement.dateTime = now.toISOString().split("T")[0];
+    };
+
+    updateDate();
+    setInterval(updateDate, 60 * 1000);
+
 }

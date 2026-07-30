@@ -19,6 +19,23 @@
         linear-gradient(180deg,#FCFBFF 0%,#F6F3FF 100%);
 }
 
+.hero-current-date{
+    position:absolute;
+    top:96px;
+    left:4%;
+    z-index:3;
+    display:inline-flex;
+    padding:7px 12px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:rgba(255,255,255,.72);
+    color:var(--text-light);
+    font-size:.78rem;
+    font-weight:600;
+    backdrop-filter:blur(8px);
+    box-shadow:var(--shadow-sm);
+}
+
 /* ==========================================================
    الخلفية
 ========================================================== */
@@ -492,6 +509,13 @@ a.hero-info-item:focus-visible{
 
     }
 
+    .hero-current-date{
+        top:82px;
+        left:16px;
+        padding:6px 10px;
+        font-size:.7rem;
+    }
+
     .hero h1{
 
         font-size:42px;
@@ -528,6 +552,14 @@ a.hero-info-item:focus-visible{
 
         padding:90px 0 50px;
 
+    }
+
+    .hero-current-date{
+        top:72px;
+        left:12px;
+        max-width:calc(100% - 24px);
+        font-size:.66rem;
+        white-space:nowrap;
     }
 
     .hero h1{
