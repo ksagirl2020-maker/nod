@@ -14,11 +14,13 @@ import {
 } from "../sections/volunteering.js";
 import { Contact } from "../sections/contact.js";
 import { Navbar, initNavbar } from "../components/navbar.js";
+import { Footer } from "../components/footer.js";
 
 async function init() {
 
     const app = document.querySelector("#app");
     const header = document.querySelector("#header");
+    const footer = document.querySelector("#footer");
 
     header.innerHTML = Navbar();
 
@@ -35,6 +37,7 @@ async function init() {
     ]);
 
     app.innerHTML = sections.join("");
+    footer.innerHTML = Footer();
 
     initNavbar();
     initCertificates();
