@@ -79,15 +79,22 @@
    Grid
 ========================== */
 
+.about-grid-title{
+    margin-top:60px;
+    color:var(--text);
+    font-size:1.55rem;
+    text-align:center;
+}
+
 .about-grid{
 
-    margin-top:70px;
+    margin-top:28px;
 
     display:grid;
 
     grid-template-columns:repeat(4,1fr);
 
-    gap:28px;
+    gap:22px;
 
 }
 
@@ -99,9 +106,9 @@
 
     background:#fff;
 
-    border-radius:22px;
+    border-radius:18px;
 
-    padding:34px;
+    padding:26px;
 
     transition:.35s;
 
@@ -156,11 +163,11 @@
 
 .card-icon{
 
-    width:66px;
+    width:54px;
 
-    height:66px;
+    height:54px;
 
-    border-radius:18px;
+    border-radius:15px;
 
     background:#f5f3ff;
 
@@ -170,7 +177,7 @@
 
     justify-content:center;
 
-    margin-bottom:24px;
+    margin-bottom:18px;
 
     color:#7c3aed;
 
@@ -190,17 +197,17 @@
 
 .card-icon svg{
 
-    width:30px;
+    width:26px;
 
-    height:30px;
+    height:26px;
 
 }
 
 .about-card h3{
 
-    font-size:1.20rem;
+    font-size:1.08rem;
 
-    margin-bottom:16px;
+    margin-bottom:12px;
 
     color:#111827;
 
@@ -210,7 +217,9 @@
 
     color:#6b7280;
 
-    line-height:1.9;
+    font-size:.92rem;
+
+    line-height:1.8;
 
 }
 
@@ -238,13 +247,67 @@ padding:80px 0;
 
 .about-grid{
 
-grid-template-columns:1fr;
+grid-template-columns:repeat(2,minmax(0,1fr));
+
+gap:12px;
 
 }
 
 .about-card{
 
-padding:28px;
+padding:16px;
+
+border-radius:14px;
+
+}
+
+.about-grid-title{
+
+margin-top:46px;
+
+font-size:1.3rem;
+
+}
+
+.card-icon{
+
+width:42px;
+
+height:42px;
+
+margin-bottom:13px;
+
+border-radius:12px;
+
+}
+
+.card-icon svg{
+
+width:21px;
+
+height:21px;
+
+}
+
+.about-card h3{
+
+font-size:.92rem;
+
+margin-bottom:9px;
+
+line-height:1.6;
+
+overflow-wrap:anywhere;
+
+}
+
+.about-card p{
+
+font-size:.78rem;
+
+line-height:1.7;
+
+overflow-wrap:anywhere;
 
 }
 

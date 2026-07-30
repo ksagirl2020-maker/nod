@@ -35,6 +35,10 @@ style="background:${settings["لون الخلفية"] || "#fff"}">
 
     </div>
 
+    <h3 class="about-grid-title">
+        الكفاءات الرئيسية
+    </h3>
+
     <div class="about-grid">
 
         ${items.map(card => `
