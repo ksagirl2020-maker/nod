@@ -35,6 +35,21 @@ style="background:${settings["لون الخلفية"] || "#fff"}">
 
     </div>
 
+    <div class="media-license" aria-labelledby="media-license-title">
+        <h3 class="media-license-title" id="media-license-title">
+            مرخصة إعلامية
+        </h3>
+
+        <figure class="media-license-card">
+            <img
+                src="assets/media/media-license-card.png"
+                alt="البطاقة الإعلامية"
+                loading="lazy"
+                decoding="async"
+            >
+        </figure>
+    </div>
+
     <h3 class="about-grid-title">
         الكفاءات الرئيسية
     </h3>
