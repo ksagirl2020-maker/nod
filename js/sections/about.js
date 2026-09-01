@@ -42,11 +42,11 @@ style="background:${settings["لون الخلفية"] || "#fff"}">
 
         <figure class="media-license-card">
             <img
-                src="assets/media/media-license-card.png"
-                alt="البطاقة الإعلامية"
-                loading="lazy"
-                decoding="async"
-            >
+    src="media-license.png"
+    alt="البطاقة الإعلامية"
+    loading="lazy"
+    decoding="async"
+>
         </figure>
     </div>
 
