@@ -312,3 +312,56 @@ overflow-wrap:anywhere;
 }
 
 }
+
+/* ==========================
+   Media license
+========================== */
+.media-license{
+    max-width:980px;
+    margin:52px auto 0;
+    text-align:center;
+}
+
+.media-license-title{
+    margin:0 0 24px;
+    color:var(--text);
+    font-size:1.55rem;
+    font-weight:700;
+}
+
+.media-license-card{
+    margin:0;
+    padding:10px;
+    background:#fff;
+    border:1px solid #ede9fe;
+    border-radius:22px;
+    box-shadow:0 14px 38px rgba(0,0,0,.08);
+    overflow:hidden;
+}
+
+.media-license-card img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:15px;
+}
+
+@media(max-width:700px){
+    .media-license{
+        margin-top:40px;
+    }
+
+    .media-license-title{
+        margin-bottom:18px;
+        font-size:1.3rem;
+    }
+
+    .media-license-card{
+        padding:6px;
+        border-radius:16px;
+    }
+
+    .media-license-card img{
+        border-radius:11px;
+    }
+}
